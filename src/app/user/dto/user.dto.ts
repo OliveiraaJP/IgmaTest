@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { IsValidCpf } from '../validator/cpf-format.validator';
 
 export class UserDto {
   @IsNotEmpty()
@@ -11,5 +12,6 @@ export class UserDto {
 
   @IsNotEmpty()
   @IsString()
+  @IsValidCpf()
   cpf: string;
 }

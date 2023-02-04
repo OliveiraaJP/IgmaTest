@@ -1,0 +1,26 @@
+services: 
+  igmadatabase:
+    image: postgres
+    container_name: igmadatabase
+    restart: always  
+    ports:
+      - 1234:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=igmadatabase
+    volumes:
+      - pg:/var/lib/postgresql/data
+       
+  igmaback:
+    container_name: igmaback
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - igmadatabase        
+    env_file:
+      - .env
+      
+volumes:
+  pg:

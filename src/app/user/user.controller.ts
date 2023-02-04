@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
@@ -18,5 +18,10 @@ export class UserController {
     @Query('take') take: number,
   ): Promise<UserEntity[]> {
     return this.userService.findAll(page, take);
+  }
+
+  @Get(':cpf')
+  async listOne(@Param('cpf') cpf: string): Promise<UserEntity> {
+    return this.userService.findOne(cpf);
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
@@ -17,5 +17,11 @@ export class UserService {
 
   async findAll(page = 1, take = 5): Promise<UserEntity[]> {
     return this.userRepository.find({ skip: page, take: take });
+  }
+
+  async findOne(cpf: string): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({ cpf });
+    if (!user) throw new HttpException('Cpf not found!', HttpStatus.NOT_FOUND);
+    return user;
   }
 }

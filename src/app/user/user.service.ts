@@ -12,6 +12,7 @@ export class UserService {
   ) {}
 
   async save(data: UserDto): Promise<UserEntity> {
+    data.cpf = data.cpf.replace(/[^\d]+/g, '');
     return this.userRepository.save(this.userRepository.create(data));
   }
 

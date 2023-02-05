@@ -12,6 +12,7 @@ Projeto de uma API para cadastro de clientes fornecendo CPF / Nome / Data de nas
 - Validação de CPF por formato (com ou sem máscara) e seguindo as regras nacionais, que foram baseadas neste <a href= "https://www.macoratti.net/alg_cpf.htm#:~:text=O" target="_blank"> link</a>.
 - Visualização de todos os usuários cadastrados usando páginação e limite de usuários por página.
 - Visualização de 1 usuário sendo fornecido seu respectivo CPF.
+- Deletar usuário sendo fornecido seu respectivo CPF.
 - Projeto dockerizado para facilitar sua instalação.
 - Testes feitos e mostrados como rodar localmente na parte de [`💁🏻‍♂️ Instalação Manual`](#💁🏻‍♂️-instalação-manual)
 
@@ -146,8 +147,20 @@ GET /api/v1/user/:cpf
 ```
 
 ```yml
+DELETE /api/v1/user/:cpf
+    - Rota que retorna deleta usuários cadastrados naquele CPF
+    - headers: {}
+    - query: {
+        cpf = cpf do usuário cadastrado no banco de dados
+    }
+    - body: {}
+```
+
+```yml
 GET /
     - Rota que retorna o Hello World da sorte
     - headers: {}
     - body: {}
 ```
+
+

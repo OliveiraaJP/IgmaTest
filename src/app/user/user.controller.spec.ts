@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { DeleteResult } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { UserController } from './user.controller';
 import { UserEntity } from './user.entity';
@@ -18,6 +19,7 @@ describe('UserController', () => {
             save: jest.fn(),
             findOne: jest.fn(),
             findAll: jest.fn(),
+            deleteCpf: jest.fn(),
           },
         },
       ],
@@ -99,6 +101,21 @@ describe('UserController', () => {
       expect(userService.findAll).toBeCalledTimes(1);
       expect(result['0'].name).toStrictEqual(body[0].name);
       expect(result['1'].cpf).toStrictEqual(body[1].cpf);
+    });
+  });
+
+  describe('delete cpf', () => {
+    it('should delete cpf', async () => {
+      jest
+        .spyOn(userService, 'deleteCpf')
+        .mockResolvedValue('asd' as unknown as Promise<DeleteResult>);
+
+      //Act
+      const result = await userController.deleteCpf('123456789');
+
+      //Assert
+      expect(result).toBeDefined();
+      expect(userService.deleteCpf).toBeCalledTimes(1);
     });
   });
 });

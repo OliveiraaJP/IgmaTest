@@ -21,6 +21,7 @@ describe('UserService', () => {
             save: jest.fn(),
             find: jest.fn(),
             findOne: jest.fn(),
+            findOneOrFail: jest.fn(),
           },
         },
       ],
@@ -118,6 +119,19 @@ describe('UserService', () => {
       jest
         .spyOn(userRepository, 'findOne')
         .mockRejectedValueOnce(new Error('Cpf not found!'));
+
+      //Assert
+      expect(userService.findOne('123456789')).rejects.toThrowError(
+        new HttpException('Cpf not found!', HttpStatus.NOT_FOUND),
+      );
+    });
+  });
+  describe('delete cpf', () => {
+    it('should throw error not found status code', () => {
+      //Arrange
+      jest
+        .spyOn(userRepository, 'findOneOrFail')
+        .mockRejectedValueOnce(new Error());
 
       //Assert
       expect(userService.findOne('123456789')).rejects.toThrowError(

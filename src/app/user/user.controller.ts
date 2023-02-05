@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
@@ -23,5 +33,11 @@ export class UserController {
   @Get(':cpf')
   async listOne(@Param('cpf') cpf: string): Promise<UserEntity> {
     return this.userService.findOne(cpf);
+  }
+
+  @Delete(':cpf')
+  @HttpCode(204)
+  async deleteCpf(@Param('cpf') cpf: string): Promise<DeleteResult> {
+    return this.userService.deleteCpf(cpf);
   }
 }

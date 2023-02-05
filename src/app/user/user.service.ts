@@ -16,7 +16,7 @@ export class UserService {
     return this.userRepository.save(this.userRepository.create(data));
   }
 
-  async findAll(page = 1, take = 5): Promise<UserEntity[]> {
+  async findAll(page = 0, take = 5): Promise<UserEntity[]> {
     return this.userRepository.find({ skip: page, take: take });
   }
 

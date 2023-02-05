@@ -14,8 +14,8 @@ export class UserController {
 
   @Get()
   async listAll(
-    @Query('page') page: number,
-    @Query('take') take: number,
+    @Query('page') page?: number,
+    @Query('take') take?: number,
   ): Promise<UserEntity[]> {
     return this.userService.findAll(page, take);
   }

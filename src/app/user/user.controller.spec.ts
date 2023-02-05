@@ -16,6 +16,8 @@ describe('UserController', () => {
           provide: UserService,
           useValue: {
             save: jest.fn(),
+            findOne: jest.fn(),
+            findAll: jest.fn(),
           },
         },
       ],
@@ -39,14 +41,64 @@ describe('UserController', () => {
         birthday: '22/04/1994',
       };
       const userEntityMock = { ...body } as UserEntity;
-      jest.spyOn(userController, 'save').mockResolvedValue(userEntityMock);
+      jest.spyOn(userService, 'save').mockResolvedValue(userEntityMock);
 
       //Act
       const result = await userController.save(body);
 
       //Assert
       expect(result).toBeDefined();
-      expect(userController.save).toBeCalledTimes(1);
+      expect(userService.save).toBeCalledTimes(1);
+    });
+  });
+
+  describe('listOne', () => {
+    it('should return 1 user', async () => {
+      //Arrange
+      const body: UserDto = {
+        name: 'Dev',
+        cpf: '22520895047',
+        birthday: '22/04/1994',
+      };
+      const userEntityMock = { ...body } as UserEntity;
+      jest.spyOn(userService, 'findOne').mockResolvedValue(userEntityMock);
+
+      //Act
+      const result = await userController.listOne(body.cpf);
+
+      //Assert
+      expect(result).toBeDefined();
+      expect(userService.findOne).toBeCalledTimes(1);
+      expect(body.cpf).toStrictEqual(result.cpf);
+    });
+  });
+
+  describe('listAll', () => {
+    it('should return all user', async () => {
+      //Arrange
+      const body: UserDto[] = [
+        {
+          name: 'Dev',
+          cpf: '22520895047',
+          birthday: '22/04/1994',
+        },
+        {
+          name: 'Dev2',
+          cpf: '52301849066',
+          birthday: '22/04/1994',
+        },
+      ];
+      const userEntityMock = { ...body } as UserEntity[];
+      jest.spyOn(userService, 'findAll').mockResolvedValue(userEntityMock);
+
+      //Act
+      const result = await userController.listAll();
+
+      //Assert
+      expect(result).toBeDefined();
+      expect(userService.findAll).toBeCalledTimes(1);
+      expect(result['0'].name).toStrictEqual(body[0].name);
+      expect(result['1'].cpf).toStrictEqual(body[1].cpf);
     });
   });
 });

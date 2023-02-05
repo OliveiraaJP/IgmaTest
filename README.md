@@ -73,6 +73,14 @@ $ npm start
  - Accesse em seu navegador o link localhost:3000 ou 127.0.0.1:3000
 - Agora a aplicação está rodando na sua máquina e se tudo correu bem deve estar vendo um "Hello World" no seu navegador
 
+- Para rodar os testes abra um terminal na pasta raíz do projeto e rode o seguinte comando
+ ```bash
+# Para puramente rodar os testes
+$ npm run test
+
+# Para rodar com porcentagem da cobertura dos testes
+$ npm run test:cov
+```
 ---
 
 ## 🚀 API:

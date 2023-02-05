@@ -6,12 +6,22 @@
 
 ## 🖥️ Descrição do Projeto
 
-  Projeto de uma API para cadastro de clientes fornecendo CPF / Nome / Data de nascimento:
-  - Criação de usuários.
-  - Validação de CPF por formato (com ou sem máscara) e seguindo as regras nacionais, que foram baseadas neste <a href= "https://www.macoratti.net/alg_cpf.htm#:~:text=O" target="_blank"> link</a>.
-  - Visualização de todos os usuários cadastrados usando páginação e limite de usuários por página.
-  - Visualização de 1 usuário sendo fornecido seu respectivo CPF.
-  - Projeto dockerizado para facilitar sua instalação.
+Projeto de uma API para cadastro de clientes fornecendo CPF / Nome / Data de nascimento:
+
+- Criação de usuários.
+- Validação de CPF por formato (com ou sem máscara) e seguindo as regras nacionais, que foram baseadas neste <a href= "https://www.macoratti.net/alg_cpf.htm#:~:text=O" target="_blank"> link</a>.
+- Visualização de todos os usuários cadastrados usando páginação e limite de usuários por página.
+- Visualização de 1 usuário sendo fornecido seu respectivo CPF.
+- Projeto dockerizado para facilitar sua instalação.
+- Testes feitos e mostrados como rodar localmente na parte de [`💁🏻‍♂️ Instalação Manual`](#💁🏻‍♂️-instalação-manual)
+
+## 🗒️ Índice
+
+- [💻 Tecnologias e Ferramentas](#💻-tecnologias-e-ferramentas)
+- [👨🏻‍💻 Instalação Docker](#👨🏻‍💻-instalação-docker)
+- [💁🏻‍♂️ Instalação Manual](#💁🏻‍♂️-instalação-manual)
+- [⚙ Rodando os testes](#⚙-rodando-os-testes)
+- [🚀 API](#🚀-api)
 
 ## 💻 Tecnologias e Ferramentas
 
@@ -22,35 +32,43 @@
  <img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white">
 <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white">
 <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white">
-
+<img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white
+">
 
 ---
 
 ## 👨🏻‍💻 Instalação Docker
 
 - Clone o projeto usando um desses 2 comandos
+
 ```bash
+#Clone via https
 $ git clone https://github.com/OliveiraaJP/IgmaTest.git
 
 OU
-
+#Clone via ssh
 $ git clone git@github.com:OliveiraaJP/IgmaTest.git
 ```
+
 - Criar um arquivo .env seguindo o documento .env-docker.example da raíz do projeto
 - As variáveis fornecidas lá coincidem com as do container docker que será criado seguindo os comandos abaixo, caso queira alterar o nome de alguma variável tem também que alterar no arquivo docker-compose.yml
 - Rode os seguintes comandos dentro da pasta do projeto clonado
+
 ```bash
 $ docker-compose build
 
 $ docker-compose up
 ```
+
 - Accesse em seu navegador o link localhost:3000 ou 127.0.0.1:3000
 - Agora a aplicação está rodando na sua máquina e se tudo correu bem deve estar vendo um "Hello World" no seu navegador
+
 ---
- 
- ## 💁🏻‍♂️ Instalação Manual
+
+## 💁🏻‍♂️ Instalação Manual
 
 - Clone o projeto usando um desses 2 comandos
+
 ```bash
 $ git clone https://github.com/OliveiraaJP/IgmaTest.git
 
@@ -58,23 +76,31 @@ OU
 
 $ git clone git@github.com:OliveiraaJP/IgmaTest.git
 ```
+
 - Criar um arquivo .env seguindo o documento .env.example da raíz do projeto
 
 - Crie um banco de dados local postgres com o mesmo nome que tenha usado na variável da chave `DB_DATABASE`
- 
+
 - Caso queira testar usando outro banco de dados relacional tem que acessar o arquivo `src/app.module.ts` e alterar o `type: 'postgres'` para o banco relacional de sua preferência fazendo as devidas alterações para conexão no .env previamente criado
 
 - Rode os seguintes comandos dentro da pasta do projeto clonado
- ```bash
+
+```bash
 $ npm i
 
 $ npm start
 ```
- - Accesse em seu navegador o link localhost:3000 ou 127.0.0.1:3000
+
+- Accesse em seu navegador o link localhost:3000 ou 127.0.0.1:3000
 - Agora a aplicação está rodando na sua máquina e se tudo correu bem deve estar vendo um "Hello World" no seu navegador
 
-- Para rodar os testes abra um terminal na pasta raíz do projeto e rode o seguinte comando
- ```bash
+
+---
+## ⚙ Rodando os testes
+- Antes de tudo siga os passos acima realizando a [instalação manual](#💁🏻‍♂️-instalação-manual)
+- Em seguida para rodar os testes abra um terminal na pasta raíz do projeto e rode um dos seguintes comandos
+
+```bash
 # Para puramente rodar os testes
 $ npm run test
 
@@ -119,9 +145,8 @@ GET /api/v1/user/:cpf
 ```
 
 ```yml
-GET / 
+GET /
     - Rota que retorna o Hello World da sorte
     - headers: {}
     - body: {}
 ```
-

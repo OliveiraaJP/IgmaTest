@@ -9,6 +9,7 @@
 Projeto de uma API para cadastro de clientes fornecendo CPF / Nome / Data de nascimento:
 
 - Criação de usuários.
+- Validação para impedir criação de usuários já criados.
 - Validação de CPF por formato (com ou sem máscara) e seguindo as regras nacionais, que foram baseadas neste <a href= "https://www.macoratti.net/alg_cpf.htm#:~:text=O" target="_blank"> link</a>.
 - Visualização de todos os usuários cadastrados usando páginação e limite de usuários por página.
 - Visualização de 1 usuário sendo fornecido seu respectivo CPF.

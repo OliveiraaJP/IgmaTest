@@ -18,6 +18,10 @@ export class UserService {
 
   async save(data: UserDto): Promise<UserEntity> {
     data.cpf = data.cpf.replace(/[^\d]+/g, '');
+    const { cpf } = data;
+    const user = await this.userRepository.findOne({ cpf });
+    if (user)
+      throw new HttpException('Cpf already registered!', HttpStatus.CONFLICT);
     return this.userRepository.save(this.userRepository.create(data));
   }
 

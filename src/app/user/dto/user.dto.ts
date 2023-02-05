@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { IsValidBirthday } from '../validator/birthday-format.validator';
 import { IsValidCpf } from '../validator/cpf-format.validator';
 
 export class UserDto {
@@ -8,6 +9,7 @@ export class UserDto {
 
   @IsNotEmpty()
   @IsString()
+  @IsValidBirthday()
   birthday: string;
 
   @IsNotEmpty()

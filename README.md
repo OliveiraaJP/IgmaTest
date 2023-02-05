@@ -70,10 +70,11 @@ $ docker-compose up
 - Clone o projeto usando um desses 2 comandos
 
 ```bash
+#Clone via https
 $ git clone https://github.com/OliveiraaJP/IgmaTest.git
 
 OU
-
+#Clone via ssh
 $ git clone git@github.com:OliveiraaJP/IgmaTest.git
 ```
 
@@ -97,7 +98,7 @@ $ npm start
 
 ---
 ## ⚙ Rodando os testes
-- Antes de tudo siga os passos acima realizando a [instalação manual](#💁🏻‍♂️-instalação-manual)
+- Primeiramente tenha feito o clone do projeto
 - Em seguida para rodar os testes abra um terminal na pasta raíz do projeto e rode um dos seguintes comandos
 
 ```bash

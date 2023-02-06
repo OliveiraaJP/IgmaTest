@@ -9,11 +9,14 @@
 Projeto de uma API para cadastro de clientes fornecendo CPF / Nome / Data de nascimento:
 
 - Criação de usuários.
+
 - Validação para impedir criação de usuários já criados.
 - Validação de CPF por formato (com ou sem máscara) e seguindo as regras nacionais, que foram baseadas neste <a href= "https://www.macoratti.net/alg_cpf.htm#:~:text=O" target="_blank"> link</a>.
+- Validação de data de aniversário seguindo padrão DD/MM/YYYY
 - Visualização de todos os usuários cadastrados usando páginação e limite de usuários por página.
 - Visualização de 1 usuário sendo fornecido seu respectivo CPF.
 - Deletar usuário sendo fornecido seu respectivo CPF.
+- Atualizar usuários sendo fornecido seu CPF e CPF não pode ser alterado.
 - Projeto dockerizado para facilitar sua instalação.
 - Testes feitos e mostrados como rodar localmente na parte de [`💁🏻‍♂️ Instalação Manual`](#💁🏻‍♂️-instalação-manual)
 
@@ -109,6 +112,16 @@ $ npm run test
 
 # Para rodar com porcentagem da cobertura dos testes
 $ npm run test:cov
+
+# Para rodar relativos ao user service
+$ npm run test -t src/app/user/user.service.spec.ts
+
+# Para rodar relativos ao user controller
+$ npm run test -t src/app/user/user.controller.spec.ts
+
+## Para rodar testes em futuras pastas distintas 
+## basta trocar o caminho relativo da pasta fonte
+## e substituir após flag -t
 ```
 ---
 
@@ -121,7 +134,7 @@ POST /api/v1/user
     - body: {
         "name": String
         "cpf": String - formato= xxxxxxxxxxx OU xxx.xxx.xxx-xx
-        "birthday": String
+        "birthday": String - formato= DD/MM/YYYY 
     }
 ```
 
@@ -155,6 +168,20 @@ DELETE /api/v1/user/:cpf
         cpf = cpf do usuário cadastrado no banco de dados
     }
     - body: {}
+```
+
+```yml
+PUT /api/v1/user/:cpf
+    - Rota para atualizar 1 usuário
+    - Cpf não pode ser alterado
+    - headers: {}
+    - query: {
+        cpf = cpf do usuário cadastrado no banco de dados
+    }
+    - body: {
+        "name": String
+        "birthday": String - formato= DD/MM/YYYY 
+    }
 ```
 
 ```yml

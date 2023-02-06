@@ -6,9 +6,11 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
-import { DeleteResult } from 'typeorm';
+import { DeleteResult, UpdateResult } from 'typeorm';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
@@ -39,5 +41,13 @@ export class UserController {
   @HttpCode(204)
   async deleteCpf(@Param('cpf') cpf: string): Promise<DeleteResult> {
     return this.userService.deleteCpf(cpf);
+  }
+
+  @Put(':cpf')
+  async update(
+    @Param('cpf') cpf: string,
+    @Body() body: UpdateUserDto,
+  ): Promise<UpdateResult> {
+    return this.userService.update(body, cpf);
   }
 }

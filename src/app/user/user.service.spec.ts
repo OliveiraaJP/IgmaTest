@@ -126,7 +126,22 @@ describe('UserService', () => {
       );
     });
   });
+
   describe('delete cpf', () => {
+    it('should throw error not found status code', () => {
+      //Arrange
+      jest
+        .spyOn(userRepository, 'findOneOrFail')
+        .mockRejectedValueOnce(new Error());
+
+      //Assert
+      expect(userService.findOne('123456789')).rejects.toThrowError(
+        new HttpException('Cpf not found!', HttpStatus.NOT_FOUND),
+      );
+    });
+  });
+
+  describe('update user', () => {
     it('should throw error not found status code', () => {
       //Arrange
       jest

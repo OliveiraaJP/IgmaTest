@@ -1,11 +1,7 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
 import { UserEntity } from './user.entity';
 
@@ -48,5 +44,19 @@ export class UserService {
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
+  }
+
+  async update(body: UpdateUserDto, cpf: string) {
+    const user = await this.userRepository.findOne({ cpf });
+    const { name, birthday } = body;
+    if (!user) throw new HttpException('Cpf not found!', HttpStatus.NOT_FOUND);
+    if (body['cpf'])
+      throw new HttpException('Cpf cannot be change!', HttpStatus.FORBIDDEN);
+    return await this.userRepository
+      .createQueryBuilder()
+      .update(UserEntity)
+      .set({ name, birthday })
+      .where('cpf = :cpf', { cpf })
+      .execute();
   }
 }
